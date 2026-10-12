@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#6a11cb">
+<meta name="description" content="لعبة الحروف — تعلّم الحروف العربية والإنجليزية باللعب، تعمل بدون إنترنت">
+<title>🎈 لعبة الحروف - Letters Game</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+  <button class="mute-btn" id="mute-btn" aria-label="كتم الصوت" title="الصوت">🔊</button>
+
+  <!-- ===== الشاشة الرئيسية ===== -->
+  <section id="screen-home" class="screen active">
+    <h1>🎈 لعبة الحروف 🎈</h1>
+    <p class="sub">تعلّم الحروف العربية والإنجليزية باللعب والنطق<br>
+      <span style="direction:ltr;display:inline-block">Learn Arabic &amp; English Letters</span>
+    </p>
+    <div class="lang-btns">
+      <button class="big-btn ar" id="btn-ar"><span class="flag">🇸🇦</span> العربية</button>
+      <button class="big-btn en" id="btn-en"><span class="flag">🇬🇧</span> English</button>
+    </div>
+    <p class="speak-hint" style="margin-top:26px">
+      🔊 الأصوات مدمجة داخل التطبيق — تعمل بدون إنترنت<br>
+      <span style="direction:ltr;display:inline-block">Sounds are built in — works offline</span>
+    </p>
+    <div class="ok-badge" id="offline-badge">✅ جاهزة للعمل بدون إنترنت · Ready offline</div>
+    <button class="install-btn" id="install-btn">📲 تثبيت التطبيق · Install</button>
+  </section>
+
+  <!-- ===== القائمة ===== -->
+  <section id="screen-menu" class="screen">
+    <div class="topbar">
+      <button class="back-btn" id="menu-home" data-i18n="home">🏠 الرئيسية</button>
+      <span class="hud" id="menu-lang">العربية</span>
+    </div>
+    <h2 data-i18n="menuTitle">اختر النشاط</h2>
+    <p class="sub" data-i18n="menuSub">ماذا تريد أن تتعلم اليوم؟</p>
+
+    <button class="menu-btn m-learn" id="m-learn"><span class="ico">📖</span><span data-i18n="learn">تعلّم الحروف والكلمات</span></button>
+    <button class="menu-btn m-speak" id="m-speak"><span class="ico">🎤</span><span data-i18n="speak">تدرّب على النطق</span></button>
+    <button class="menu-btn m-practice" id="m-practice"><span class="ico">✏️</span><span data-i18n="practice">تدريبات ممتعة</span></button>
+    <button class="menu-btn m-quiz" id="m-quiz"><span class="ico">🏆</span><span data-i18n="quiz">اختبار وجمع النجوم</span></button>
+  </section>
+
+  <!-- ===== التعلّم ===== -->
+  <section id="screen-learn" class="screen">
+    <div class="topbar">
+      <button class="back-btn" data-back data-i18n="back">رجوع</button>
+      <span class="hud" id="learn-progress">1 / 28</span>
+    </div>
+    <div class="letter-card" id="letter-card" role="button" tabindex="0">
+      <div class="letter-big" id="learn-letter">أ</div>
+    </div>
+    <div class="word-card" id="word-card" role="button" tabindex="0">
+      <div class="word-emoji" id="learn-emoji">🦁</div>
+      <div class="word-text" id="learn-word">أسد</div>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prev-btn" data-i18n="prev">→ السابق</button>
+      <button class="nav-btn" id="next-btn" data-i18n="next">التالي ←</button>
+    </div>
+    <p class="speak-hint" data-i18n="tapHint">👆 اضغط على البطاقة لسماع النطق</p>
+  </section>
+
+  <!-- ===== النطق ===== -->
+  <section id="screen-speak" class="screen">
+    <div class="topbar">
+      <button class="back-btn" data-back data-i18n="back">رجوع</button>
+      <span class="hud" id="speak-hud">0 ✅</span>
+    </div>
+    <h2 data-i18n="speakTitle">استمع وكرّر</h2>
+    <p class="sub" data-i18n="speakInst">استمع للحرف ثم انطقه بصوتك</p>
+    <div class="letter-card" id="speak-letter-card" role="button" tabindex="0">
+      <div class="letter-big" id="speak-letter">أ</div>
+    </div>
+    <div class="word-card" id="speak-word-card" role="button" tabindex="0">
+      <div class="word-emoji" id="speak-emoji">🦁</div>
+      <div class="word-text" id="speak-word">أسد</div>
+    </div>
+    <div class="mic-row">
+      <button class="mic-btn" id="mic-btn" title="🎤">🎤</button>
+    </div>
+    <div class="mic-hint" id="mic-hint"></div>
+    <div class="heard-box" id="heard-box"></div>
+    <div class="nav-row" style="margin-top:12px">
+      <button class="nav-btn" id="listen-btn" data-i18n="listen">🔊 استمع</button>
+      <button class="nav-btn green" id="said-btn" data-i18n="iSaidIt">✅ نطقتُه</button>
+    </div>
+    <div class="nav-row" style="margin-top:12px">
+      <button class="nav-btn" id="speak-prev" data-i18n="prev">→ السابق</button>
+      <button class="nav-btn" id="speak-next" data-i18n="next">التالي ←</button>
+    </div>
+    <div id="speak-warn" class="warn-box" style="display:none"></div>
+  </section>
+
+  <!-- ===== التدريب / الاختبار ===== -->
+  <section id="screen-game" class="screen">
+    <div class="topbar">
+      <button class="back-btn" data-back data-i18n="back">رجوع</button>
+      <span class="hud" id="game-hud">⭐ 0</span>
+    </div>
+    <div class="question-text" id="question-text"></div>
+    <div class="prompt-area" id="prompt-area" role="button" tabindex="0"></div>
+    <div class="options" id="options-area"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+  </section>
+
+  <!-- ===== النتيجة ===== -->
+  <section id="screen-result" class="screen">
+    <div class="result-box">
+      <h2 id="result-title">انتهى الاختبار! 🎉</h2>
+      <div class="result-stars" id="result-stars"></div>
+      <div class="result-score" id="result-score">0 / 10</div>
+      <div class="result-msg" id="result-msg"></div>
+      <div class="result-best" id="result-best"></div>
+      <div class="nav-row" style="grid-template-columns:1fr;">
+        <button class="nav-btn" id="again-btn" data-i18n="again">🔁 إعادة الاختبار</button>
+      </div>
+      <div class="nav-row" style="grid-template-columns:1fr; margin-top:12px;">
+        <button class="nav-btn" id="result-menu" style="background:linear-gradient(135deg,#8e9eab,#667db6)" data-i18n="toMenu">🏠 القائمة الرئيسية</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/synth.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
