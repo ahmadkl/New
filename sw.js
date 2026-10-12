@@ -1,18 +1,18 @@
 /* Service Worker — يخزّن كل ملفات اللعبة للعمل بدون إنترنت.
    عند تعديل أي ملف: غيّر رقم VERSION ليتحدّث التطبيق عند المستخدمين. */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = 'letters-game-' + VERSION;
 const FILES = [
   './',
   'index.html',
   'style.css',
-  'js/data.js',
-  'js/synth.js',
-  'js/app.js',
+  'data.js',
+  'synth.js',
+  'app.js',
   'manifest.webmanifest',
-  'icons/icon-192.png',
-  'icons/icon-512.png',
-  'icons/icon-maskable-512.png'
+  'icon-192.png',
+  'icon-512.png',
+  'icon-maskable-512.png'
 ];
 
 self.addEventListener('install', function (e) {
